@@ -1,13 +1,13 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "CloudFormation template to create an S3 bucket",
   "Resources": {
-    "OpenskyS3BucketTempFiles": {
+    "MyS3Bucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "BucketName": "opensky-s3-bucket-temp-files"
+        "BucketName": {
+          "Fn::Sub": "opensky-s3-bucket-temp-files-${AWS::AccountId}"
+        }
       }
     }
   }
 }
-
