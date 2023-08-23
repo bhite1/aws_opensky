@@ -1,0 +1,65 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "CloudFormation Template for launching EC2 instance with user-defined settings",
+  "Parameters": {
+    "KeyName": {
+      "Description": "Name of an existing EC2 KeyPair to enable SSH access",
+      "Type": "AWS::EC2::KeyPair::KeyName"
+    },
+    "InstanceType": {
+      "Description": "EC2 instance type",
+      "Type": "String",
+      "Default": "t2.micro",
+      "AllowedValues": [
+        "t2.micro",
+        "t2.small",
+        "t2.medium",
+        "m3.medium",
+        "m3.large"
+      ],
+      "ConstraintDescription": "Must be a valid EC2 instance type from the allowed list"
+    }
+  },
+  "Resources": {
+    "MyEC2Instance": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": {
+          "Ref": "InstanceType"
+        },
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "ImageId": {
+          "Fn::FindInMap": [
+            "RegionMap",
+            {
+              "Ref": "AWS::Region"
+            },
+            "AmazonLinuxAMI"
+          ]
+        },
+        "UserData": {
+          "Fn::Base64": {
+            "Fn::Sub": "#!/bin/bash\nyum install python3-pip -y\nmkdir python\npip3 install requests -t ./python\nzip -r requests_layer.zip ./python"
+          }
+        }
+      }
+    }
+  },
+  "Mappings": {
+    "RegionMap": {
+      "us-east-1": {
+        "AmazonLinuxAMI": "ami-0c55b159cbfafe1f0"
+      },
+      "us-west-1": {
+        "AmazonLinuxAMI": "ami-0a70c0fabb13d4e4b"
+      },
+      "us-west-2": {
+        "AmazonLinuxAMI": "ami-0323c3dd2da7fb37d"
+      }
+      // Add more mappings for other regions as necessary
+    }
+  }
+}
+
