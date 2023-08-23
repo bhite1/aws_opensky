@@ -15,7 +15,7 @@
           },
           "S3Key": "lambda_function.zip"
         },
-        "Runtime": "python3.8",
+        "Runtime": "python3.11",
         "Layers": [
           {
             "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:RequestsPythonLibrary:1"
