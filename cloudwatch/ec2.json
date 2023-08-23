@@ -27,15 +27,23 @@
         "IamInstanceProfile": "EC2toS3InstanceProfile",
         "UserData": {
           "Fn::Base64": {
-            "Fn::Join": ["", [
-              "#!/bin/bash\n",
-              "yum update -y\n",
-              "yum install python3-pip -y\n",
-              "mkdir python\n",
-              "pip3 install requests -t ./python\n",
-              "zip -r requests_layer.zip ./python\n",
-              "aws s3 cp requests_layer.zip s3://opensky-s3-bucket-temp-files-${AWS::AccountId}/"
-            ]]
+            "Fn::Sub": [
+              {
+                "Fn::Join": [
+                  "",
+                  [
+                    "#!/bin/bash\n",
+                    "yum update -y\n",
+                    "yum install python3-pip -y\n",
+                    "mkdir python\n",
+                    "pip3 install requests -t ./python\n",
+                    "zip -r requests_layer.zip ./python\n",
+                    "aws s3 cp requests_layer.zip s3://opensky-s3-bucket-temp-files-${AWS::AccountId}/\n"
+                  ]
+                ]
+              },
+              {}
+            ]
           }
         }
       }
