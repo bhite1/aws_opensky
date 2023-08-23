@@ -10,7 +10,7 @@
 
 2. Zip the Python requests package
 ```
-yum install python3-pip
+yum install python3-pip -y
 mkdir python
 pip3 install requests -t ./python
 zip -r requests_layer.zip ./python
