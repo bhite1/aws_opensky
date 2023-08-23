@@ -28,20 +28,7 @@
         "UserData": {
           "Fn::Base64": {
             "Fn::Sub": [
-              {
-                "Fn::Join": [
-                  "",
-                  [
-                    "#!/bin/bash\n",
-                    "yum update -y\n",
-                    "yum install python3-pip -y\n",
-                    "mkdir python\n",
-                    "pip3 install requests -t ./python\n",
-                    "zip -r requests_layer.zip ./python\n",
-                    "aws s3 cp requests_layer.zip s3://opensky-s3-bucket-temp-files-${AWS::AccountId}/\n"
-                  ]
-                ]
-              },
+              "#!/bin/bash\nyum update -y\nyum install python3-pip -y\nmkdir python\npip3 install requests -t ./python\nzip -r requests_layer.zip ./python\naws s3 cp requests_layer.zip s3://opensky-s3-bucket-temp-files-${AWS::AccountId}/",
               {}
             ]
           }
