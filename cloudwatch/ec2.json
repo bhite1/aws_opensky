@@ -13,9 +13,7 @@
       "AllowedValues": [
         "t2.micro",
         "t2.small",
-        "t2.medium",
-        "m3.medium",
-        "m3.large"
+        "t2.medium"
       ],
       "ConstraintDescription": "Must be a valid EC2 instance type from the allowed list"
     }
