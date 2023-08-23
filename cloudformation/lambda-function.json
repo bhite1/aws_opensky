@@ -5,7 +5,7 @@
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "FunctionName": "MyLambdaFunction",
-        "Handler": "lambda_to_dynamodb.handler",
+        "Handler": "lambda_function.handler",
         "Role": {
           "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/Lambda2DynamoDB"
         },
