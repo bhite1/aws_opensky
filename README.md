@@ -15,7 +15,7 @@ pip install requests -t ./python
 zip -r requests_layer.zip ./python
 ```
 
-3. Create the Lambda function
+3. Create the Lambda function named OpenSky2DynamoDB
 
 * Add an EventBridge rule called Trigger-5min-Lambda with an event schedule of rate(5 minutes)
 * Attach the IAM role
