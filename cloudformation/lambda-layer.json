@@ -1,0 +1,24 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "RequestsPythonLibraryLayer": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "LayerName": "RequestsPythonLibrary",
+        "Description": "Layer for the Python requests library",
+        "Content": {
+          "S3Bucket": {
+            "Fn::Sub": "opensky-s3-bucket-temp-files-${AWS::AccountId}"
+          },
+          "S3Key": "requests_layer.zip"
+        },
+        "CompatibleRuntimes": [
+          "python3.6",
+          "python3.7",
+          "python3.8",
+          "python3.9"
+        ]
+      }
+    }
+  }
+}
