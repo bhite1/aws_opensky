@@ -1,38 +1,40 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "CloudFormation Template for launching EC2 instance in us-east-1 region with S3 upload capability",
-  "Parameters": {
-    "KeyName": {
-      "Description": "Name of an existing EC2 KeyPair to enable SSH access",
-      "Type": "AWS::EC2::KeyPair::KeyName"
-    },
-    "InstanceType": {
-      "Description": "EC2 instance type",
-      "Type": "String",
-      "Default": "t2.micro",
-      "AllowedValues": [
-        "t2.micro",
-        "t2.small",
-        "t2.medium"
-      ],
-      "ConstraintDescription": "Must be a valid EC2 instance type from the allowed list"
-    }
-  },
+  "Description": "CloudFormation template for launching an EC2 instance with an open SSH port",
   "Resources": {
+    "SSHSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Enable SSH access via port 22",
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      }
+    },
     "MyEC2Instance": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "InstanceType": {
-          "Ref": "InstanceType"
-        },
-        "KeyName": {
-          "Ref": "KeyName"
-        },
+        "InstanceType": "t2.micro",
+        "SecurityGroupIds": [
+          {"Ref": "SSHSecurityGroup"}
+        ],
         "ImageId": "ami-08a52ddb321b32a8c",
-        "IamInstanceProfile": "EC2toS3",
         "UserData": {
           "Fn::Base64": {
-            "Fn::Sub": "#!/bin/bash\nyum update -y\nyum install aws-cli python3-pip -y\nmkdir python\npip3 install requests -t ./python\nzip -r requests_layer.zip ./python\naws s3 cp requests_layer.zip s3://opensky-s3-bucket-temp-files/"
+            "Fn::Join": ["", [
+              "#!/bin/bash\n",
+              "yum update -y\n",
+              "yum install python3-pip -y\n",
+              "mkdir python\n",
+              "pip3 install requests -t ./python\n",
+              "zip -r requests_layer.zip ./python\n",
+              "aws s3 cp requests_layer.zip s3://opensky-s3-bucket-temp-files/"
+            ]]
           }
         }
       }
