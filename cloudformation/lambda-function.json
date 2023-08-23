@@ -13,7 +13,7 @@
           "S3Bucket": {
             "Fn::Sub": "opensky-s3-bucket-temp-files-${AWS::AccountId}"
           },
-          "S3Key": "lambda_to_dynamodb.zip"
+          "S3Key": "lambda_function.zip"
         },
         "Runtime": "python3.8",
         "Layers": [
