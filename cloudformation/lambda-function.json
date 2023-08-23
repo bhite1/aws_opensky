@@ -1,0 +1,55 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "MyLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "FunctionName": "MyLambdaFunction",
+        "Handler": "lambda_to_dynamodb.handler",
+        "Role": {
+          "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/Lambda2DynamoDB"
+        },
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "opensky-s3-bucket-temp-files-${AWS::AccountId}"
+          },
+          "S3Key": "lambda_to_dynamodb.zip"
+        },
+        "Runtime": "python3.8",
+        "Layers": [
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:RequestsPythonLibrary:1"
+          }
+        ]
+      }
+    },
+    "EventBridgeRule": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "Description": "Trigger Lambda every 5 minutes",
+        "ScheduleExpression": "rate(5 minutes)",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": ["MyLambdaFunction", "Arn"]
+            },
+            "Id": "MyLambdaFunctionTarget"
+          }
+        ]
+      }
+    },
+    "LambdaInvokePermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": ["MyLambdaFunction", "Arn"]
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": ["EventBridgeRule", "Arn"]
+        }
+      }
+    }
+  }
+}
