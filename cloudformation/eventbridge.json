@@ -1,0 +1,22 @@
+{
+  "Resources": {
+    "Trigger5minLambdaEventRule": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "Name": "Trigger-5min-Lambda",
+        "Description": "An EventBridge rule to trigger a Lambda function every 5 minutes",
+        "ScheduleExpression": "rate(5 minutes)",
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:YourLambdaFunctionName"
+            },
+            "Id": "TargetFunctionV1"
+          }
+        ]
+      }
+    }
+  }
+}
+

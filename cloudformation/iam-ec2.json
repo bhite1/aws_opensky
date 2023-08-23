@@ -1,0 +1,49 @@
+{
+  "Resources": {
+    "EC2toS3Role": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": "EC2toS3",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "EC2toS3Policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "s3:*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "EC2toS3InstanceProfile": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "InstanceProfileName": "EC2toS3InstanceProfile",
+        "Roles": [
+          {
+            "Ref": "EC2toS3Role"
+          }
+        ]
+      }
+    }
+  }
+}
+
