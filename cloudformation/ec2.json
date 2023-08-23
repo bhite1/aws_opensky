@@ -34,7 +34,7 @@
         "UserData": {
           "Fn::Base64": {
             "Fn::Sub": [
-              "#!/bin/bash\nyum update -y\nyum install python3-pip -y\nmkdir python\npip3 install requests -t ./python\nzip -r requests_layer.zip ./python\naws s3 cp requests_layer.zip s3://opensky-s3-bucket-temp-files-${AWS::AccountId}/\nyum install git -y\ngit clone https://github.com/bhite1/aws_opensky.git\naws s3 cp aws_opensky/lambda/lambda_to_dynamodb.py s3://opensky-s3-bucket-temp-files-${AWS::AccountId}",
+              "#!/bin/bash\nyum update -y\nyum install python3-pip -y\nmkdir python\npip3 install requests -t ./python\nzip -r requests_layer.zip ./python\naws s3 cp requests_layer.zip s3://opensky-s3-bucket-temp-files-${AWS::AccountId}/\nyum install git -y\ngit clone https://github.com/bhite1/aws_opensky.git\nzip lambda_to_dynamodb.zip ./aws_opensky/lambda/lambda_to_dynamodb.py\naws s3 cp lambda_to_dynamodb.zip s3://opensky-s3-bucket-temp-files-${AWS::AccountId}/",
               {}
             ]
           }
