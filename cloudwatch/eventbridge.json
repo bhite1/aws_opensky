@@ -1,0 +1,20 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "CloudFormation template for EventBridge rule 'Trigger-5min-Lambda'",
+  "Resources": {
+    "EventRule0": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "Description": "Triggers to run a Lambda function every 5 minutes",
+        "EventBusName": "default",
+        "Name": "Trigger-5min-Lambda",
+        "ScheduleExpression": "rate(5 minutes)",
+        "State": "DISABLED",
+        "Targets": [{
+          "Id": "thbuce58l2imvn18czek",
+          "Arn": "arn:aws:lambda:us-east-1:275433395295:function:OpenSky2DynamoDB"
+        }]
+      }
+    }
+  }
+}
