@@ -1,11 +1,11 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
   "Resources": {
-    "MyLambdaFunction": {
+    "OpenSkyDataPull": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
-        "FunctionName": "MyLambdaFunction",
-        "Handler": "lambda_function.handler",
+        "FunctionName": "OpenSkyDataPull",
+        "Handler": "lambda_function.lambda_handler",
         "Role": {
           "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/Lambda2DynamoDB"
         },
@@ -31,9 +31,9 @@
         "Targets": [
           {
             "Arn": {
-              "Fn::GetAtt": ["MyLambdaFunction", "Arn"]
+              "Fn::GetAtt": ["OpenSkyDataPull", "Arn"]
             },
-            "Id": "MyLambdaFunctionTarget"
+            "Id": "OpenSkyDataPullTarget"
           }
         ]
       }
@@ -43,7 +43,7 @@
       "Properties": {
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
-          "Fn::GetAtt": ["MyLambdaFunction", "Arn"]
+          "Fn::GetAtt": ["OpenSkyDataPull", "Arn"]
         },
         "Principal": "events.amazonaws.com",
         "SourceArn": {
