@@ -1,12 +1,5 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Parameters": {
-    "LayerStackName": {
-      "Fn::ImportValue": {
-          "Fn::Sub": "${LambdaLayerChildStack}-StackName"
-      }
-    }
-  },
   "Resources": {
     "OpenSkyDataPull": {
       "Type": "AWS::Lambda::Function",
@@ -25,9 +18,7 @@
         "Runtime": "python3.11",
         "Layers": [
           {
-            "Fn::ImportValue": {
-              "Fn::Sub": "${LayerStackName}-LayerVersionArn"
-            }
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:RequestsPythonLibrary:1"
           }
         ]
       }
