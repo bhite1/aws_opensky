@@ -33,6 +33,18 @@
           "Fn::Sub": "${AWS::StackName}-LayerVersionArn"
         }
       }
+    },
+    "LayerStackName": {
+      "Description": "Name of this stack",
+      "Value": {
+        "Ref": "AWS::StackName"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-StackName"
+        }
+      }
     }
   }
+
 }

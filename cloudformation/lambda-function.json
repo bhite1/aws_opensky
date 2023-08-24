@@ -2,8 +2,9 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Parameters": {
     "LayerStackName": {
-      "Description": "The name of the CloudFormation stack for the Lambda layer",
-      "Type": "String"
+      "Fn::ImportValue": {
+          "Fn::Sub": "${LambdaLayerChildStack}-StackName"
+      }
     }
   },
   "Resources": {
