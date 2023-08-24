@@ -1,0 +1,69 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+      "BucketName": {
+        "Description": "The name of the S3 bucket containing child templates",
+        "Type": "String",
+        "Default": "HackyBucketsAreNeat"
+      }
+    },
+    "Resources": {
+      "DynamoDBChildStack": {
+        "Type": "AWS::CloudFormation::Stack",
+        "Properties": {
+          "TemplateURL": {
+            "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/dynamodb.json"
+          }
+        }
+      },
+      "EC2ChildStack": {
+        "Type": "AWS::CloudFormation::Stack",
+        "Properties": {
+          "TemplateURL": {
+            "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/ec2.json"
+          }
+        }
+      },
+      "IAM_EC2ChildStack": {
+        "Type": "AWS::CloudFormation::Stack",
+        "Properties": {
+          "TemplateURL": {
+            "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/iam-ec2.json"
+          }
+        }
+      },
+      "IAM_LambdaChildStack": {
+        "Type": "AWS::CloudFormation::Stack",
+        "Properties": {
+          "TemplateURL": {
+            "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/iam-lambda.json"
+          }
+        }
+      },
+      "LambdaFunctionChildStack": {
+        "Type": "AWS::CloudFormation::Stack",
+        "Properties": {
+          "TemplateURL": {
+            "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/lambda-function.json"
+          }
+        }
+      },
+      "LambdaLayerChildStack": {
+        "Type": "AWS::CloudFormation::Stack",
+        "Properties": {
+          "TemplateURL": {
+            "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/lambda-layer.json"
+          }
+        }
+      },
+      "S3ChildStack": {
+        "Type": "AWS::CloudFormation::Stack",
+        "Properties": {
+          "TemplateURL": {
+            "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/s3.json"
+          }
+        }
+      }
+    }
+  }
+  
