@@ -63,7 +63,7 @@
         },
         "LambdaFunctionChildStack": {
             "Type": "AWS::CloudFormation::Stack",
-            "DependsOn": "LambdaLayerChildStack",
+            "DependsOn": "EC2ChildStack",
             "Properties": {
                 "TemplateURL": {
                     "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/lambda-function.json"
