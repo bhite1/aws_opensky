@@ -60,15 +60,7 @@
                     "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/lambda-layer.json"
                 }
             }
-        },
-        "LambdaFunctionChildStack": {
-            "Type": "AWS::CloudFormation::Stack",
-            "DependsOn": "LambdaLayerChildStack",
-            "Properties": {
-                "TemplateURL": {
-                    "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/lambda-function.json"
-                }
-            }
         }
+        
     }
 }
