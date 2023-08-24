@@ -68,6 +68,11 @@
                 "TemplateURL": {
                     "Fn::Sub": "https://${BucketName}.s3.amazonaws.com/lambda-function.json"
                 }
+            },
+            "Parameters": {
+                "LayerStackName": {
+                  "Ref": "LambdaLayerChildStack"
+                }
             }
         }
     }
