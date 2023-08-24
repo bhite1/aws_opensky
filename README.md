@@ -1,3 +1,7 @@
-# aws_opensky
+# OpenSky Raw Data
 
-Old README is dated already.
+https://openskynetwork.github.io/opensky-api/
+
+# Data Enrichment
+
+https://opensky-network.org/datasets/metadata/aircraftDatabase.csv
