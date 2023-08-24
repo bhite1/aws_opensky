@@ -26,7 +26,7 @@
     "LayerVersionArn": {
       "Description": "ARN of the Lambda Layer Version",
       "Value": {
-        "Ref": "MyLambdaLayer"
+        "Ref": "RequestsPythonLibraryLayer"
       },
       "Export": {
         "Name": {
@@ -34,4 +34,5 @@
         }
       }
     }
+  }
 }
