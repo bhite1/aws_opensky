@@ -2,7 +2,7 @@
 
 # Set AWS CLI default region (change as needed)
 region="us-east-1"
-bucketName="hackybucketsareneat"
+bucketName="hackybucketsareneat1"
 stackName="ParentStack"
 deployTemplate="./deploy.json"
 

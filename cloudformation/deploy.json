@@ -4,7 +4,7 @@
         "BucketName": {
             "Description": "The name of the S3 bucket containing child templates",
             "Type": "String",
-            "Default": "hackybucketsareneat"
+            "Default": "hackybucketsareneat1"
         }
     },
     "Resources": {
