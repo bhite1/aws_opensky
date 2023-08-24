@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Set AWS CLI default region (change as needed)
-region="us-west-2"
+region="us-east-1"
 bucketName="hackybucketsareneat"
 stackName="ParentStack"
-deployTemplate="./Deploy.json"
+deployTemplate="./deploy.json"
 
 # Create S3 bucket
 aws s3api create-bucket --bucket $bucketName --region $region

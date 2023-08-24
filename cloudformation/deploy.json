@@ -24,7 +24,7 @@
           }
         }
       },
-      "IAM_EC2ChildStack": {
+      "IAMEC2ChildStack": {
         "Type": "AWS::CloudFormation::Stack",
         "Properties": {
           "TemplateURL": {
@@ -32,7 +32,7 @@
           }
         }
       },
-      "IAM_LambdaChildStack": {
+      "IAMLambdaChildStack": {
         "Type": "AWS::CloudFormation::Stack",
         "Properties": {
           "TemplateURL": {
