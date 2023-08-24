@@ -1,5 +1,11 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "LayerStackName": {
+      "Description": "The name of the CloudFormation stack for the Lambda layer",
+      "Type": "String"
+    }
+  },
   "Resources": {
     "OpenSkyDataPull": {
       "Type": "AWS::Lambda::Function",
@@ -18,7 +24,9 @@
         "Runtime": "python3.11",
         "Layers": [
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:RequestsPythonLibrary:1"
+            "Fn::ImportValue": {
+              "Fn::Sub": "${LayerStackName}-LayerVersionArn"
+            }
           }
         ]
       }

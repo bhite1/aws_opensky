@@ -21,5 +21,17 @@
         ]
       }
     }
-  }
+  },
+  "Outputs": {
+    "LayerVersionArn": {
+      "Description": "ARN of the Lambda Layer Version",
+      "Value": {
+        "Ref": "MyLambdaLayer"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-LayerVersionArn"
+        }
+      }
+    }
 }
